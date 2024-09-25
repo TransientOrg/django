@@ -2790,9 +2790,11 @@ class SchemaTests(TransactionTestCase):
         )
         # Redundant foreign key index is not added.
         self.assertEqual(
-            len(old_constraints) - 1
-            if connection.features.supports_partial_indexes
-            else len(old_constraints),
+            (
+                len(old_constraints) - 1
+                if connection.features.supports_partial_indexes
+                else len(old_constraints)
+            ),
             len(new_constraints),
         )
 
